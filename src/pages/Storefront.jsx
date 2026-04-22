@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import ProductCard from '../components/ProductCard';
 import productsData from '../data/products.json';
+import SEO from '../components/SEO';
 import './Storefront.css';
 
 const CATEGORIES = ['All', 'Furniture', 'Architectural Salvage', 'Glasses', 'Bottles', 'Decor & Accents'];
@@ -35,6 +36,10 @@ export default function Storefront() {
 
   return (
     <div className="container storefront-container animate-fade-in">
+      <SEO 
+        title="Shop the Collection - Le Petit Cadeau" 
+        description="Explore our curated collection of antique, bespoke, and unique gifts." 
+      />
       <header className="storefront-header">
         <h2>Curated Collection</h2>
         <p>Discover our unique selection of antique and bespoke items.</p>

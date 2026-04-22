@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import './Home.css';
 
 export default function Home() {
   return (
     <div className="home-container animate-fade-in">
+      <SEO />
       <section className="hero-section">
         <div className="container hero-content">
           <h1>The Perfect Gift Awaits</h1>

@@ -1,0 +1,4 @@
+Title: Le Petit Cadeau
+Description: A curated, bespoke online store built with React and Vite.
+
+This site offers a collection of unique, high-quality gifts. It is an e-commerce platform transitioning from Etsy to a custom storefront.

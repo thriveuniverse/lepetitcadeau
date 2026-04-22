@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import productsData from '../data/products.json';
 import { ArrowLeft } from 'lucide-react';
+import SEO from '../components/SEO';
 import './ProductDetail.css';
 
 export default function ProductDetail() {
@@ -26,6 +27,11 @@ export default function ProductDetail() {
 
   return (
     <div className="container product-detail-container animate-fade-in">
+      <SEO 
+        title={`${product.title} - Le Petit Cadeau`} 
+        description={product.description ? product.description.substring(0, 160) : 'View this bespoke product from Le Petit Cadeau.'} 
+        image={product.images && product.images.length > 0 ? product.images[0] : '/og-image.jpg'} 
+      />
       <Link to="/shop" className="back-link">
         <ArrowLeft size={20} /> Back to Shop
       </Link>
