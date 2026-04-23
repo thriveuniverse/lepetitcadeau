@@ -49,6 +49,11 @@ export function CartProvider({ children }) {
     ));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem('cart');
+  };
+
   const cartTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
@@ -58,6 +63,7 @@ export function CartProvider({ children }) {
       addToCart, 
       removeFromCart, 
       updateQuantity, 
+      clearCart,
       cartTotal, 
       cartCount,
       isCartOpen,

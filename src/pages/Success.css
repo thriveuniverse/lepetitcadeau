@@ -1,0 +1,59 @@
+.success-container {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-card {
+  text-align: center;
+  padding: 3rem 2.5rem;
+  max-width: 560px;
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+.success-icon {
+  color: #2ecc71;
+  margin-bottom: 1.5rem;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-card h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.success-message {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+.success-note {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.success-btn {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.05rem;
+}
