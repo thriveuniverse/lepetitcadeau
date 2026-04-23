@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import productsData from '../data/products.json';
@@ -8,8 +9,13 @@ import './ProductDetail.css';
 export default function ProductDetail() {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   
   const product = productsData.find(p => p.id === id);
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [id]);
 
   if (!product) {
     return (
@@ -39,15 +45,21 @@ export default function ProductDetail() {
       <div className="product-detail-grid">
         <div className="product-detail-images">
           {product.images && product.images.length > 0 ? (
-            <img src={product.images[0]} alt={product.title} className="main-detail-image glass-panel" />
+            <img src={product.images[selectedImageIndex] || product.images[0]} alt={product.title} className="main-detail-image glass-panel" />
           ) : (
             <div className="placeholder-image glass-panel">No Image Available</div>
           )}
           
           {product.images && product.images.length > 1 && (
             <div className="thumbnail-grid">
-              {product.images.slice(1, 5).map((img, index) => (
-                <img key={index} src={img} alt={`Thumbnail ${index + 1}`} className="thumbnail-image" />
+              {product.images.map((img, index) => (
+                <img 
+                  key={index} 
+                  src={img} 
+                  alt={`Thumbnail ${index + 1}`} 
+                  className={`thumbnail-image ${index === selectedImageIndex ? 'active' : ''}`}
+                  onClick={() => setSelectedImageIndex(index)}
+                />
               ))}
             </div>
           )}
