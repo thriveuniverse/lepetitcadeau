@@ -20,13 +20,27 @@ export default function CartSidebar() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: cartItems }),
       });
-      
+
+      if (!response.ok) {
+        let errorMsg = `Server error (${response.status})`;
+        try {
+          const errData = await response.json();
+          errorMsg = errData.error || errorMsg;
+        } catch (e) {
+          // Response wasn't JSON
+          const text = await response.text();
+          console.error('Non-JSON response:', text);
+        }
+        alert('Checkout error: ' + errorMsg);
+        return;
+      }
+
       const session = await response.json();
-      
+
       if (session.url) {
         window.location.href = session.url;
       } else {
-        alert('Checkout error: ' + (session.error || 'Unknown error'));
+        alert('Checkout error: ' + (session.error || 'No checkout URL returned'));
       }
     } catch (err) {
       console.error('Checkout error:', err);
@@ -46,7 +60,7 @@ export default function CartSidebar() {
             <X size={24} />
           </button>
         </div>
-        
+
         <div className="cart-items">
           {cartItems.length === 0 ? (
             <p className="empty-cart">Your cart is currently empty.</p>
@@ -72,7 +86,7 @@ export default function CartSidebar() {
             ))
           )}
         </div>
-        
+
         {cartItems.length > 0 && (
           <div className="cart-footer">
             <div className="cart-total">
@@ -80,8 +94,8 @@ export default function CartSidebar() {
               <span>{formattedTotal}</span>
             </div>
             <p className="cart-tax-note">Shipping and taxes calculated at checkout.</p>
-            <button 
-              className="btn-primary checkout-btn" 
+            <button
+              className="btn-primary checkout-btn"
               onClick={handleCheckout}
               disabled={isCheckingOut}
             >
